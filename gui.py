@@ -3,6 +3,7 @@ from tkinter import ttk
 from main import types , fetch
 
 # Fetch - (take screenshot, fetching text), type - (type the fetched text) , stop (emgergency stop) 
+speed_value = 0.06 
 
 root = tk.Tk()
 
@@ -21,5 +22,5 @@ print(speed_value)
 
 
 start_typing = tk.Button(root, text="Start Typing",bg="blue", fg="white",command=types)
-start_typing.grid_anchor()
+start_typing.grid()
 root.mainloop()
