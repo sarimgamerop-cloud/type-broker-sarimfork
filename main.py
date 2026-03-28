@@ -5,8 +5,9 @@ from time import sleep
 from pyautogui import typewrite , screenshot
 import re
 import subprocess
-import time
 import cv2
+import time 
+import tkinter as tk
 # ------ What i want -------  
 # Take Full Screen shot of app - (Done) 
 # Then ocr over it -- (DONE)
@@ -81,4 +82,24 @@ def fetch(img):
     clean_paragraph = re.sub(r'^[a-z]{1,2}\s+', '', clean_paragraph)
     
     return clean_paragraph
+
+def start():
+    get_img()
+    img_cleaning(img_loc)
+    fetch(dst)
+
+def gui():
+    root = tk.Tk()
+    root.title("The Title")
+    root.geometry("400x300")  # width x height
+    # Get img and clean and fetch
+    fetch = tk.Button(root, text="Fetch",bg="blue", fg="white",command=lambda : start())
+    fetch.grid()
+    # start typing yooo!
+    fetch = tk.Button(root, text="Fetch",bg="blue", fg="white",command=lambda :types(clean_paragraph))
+    fetch.grid()
+
+    root.mainloop()
+
+gui()
 
