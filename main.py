@@ -8,16 +8,10 @@ import subprocess
 import cv2
 import time 
 import tkinter as tk
-# ------ What i want -------  
-# Take Full Screen shot of app - (Done) 
-# Then ocr over it -- (DONE)
-# then clean -- (DONE)
-# Then Start typing it - Control by gui
 
+# TODO: Next Bypass Cheat Detection Captcha 
 
 project_root = Path(__file__).parent # give the location of folder
-assets = project_root / "assets"
-# img_loc =  project_root / "assets" / "image.png"
 img_loc = project_root / "image.png"
 
 def get_img():
@@ -96,7 +90,7 @@ def gui():
     fetch = tk.Button(root, text="Fetch",bg="blue", fg="white",command=lambda : start())
     fetch.grid()
     # start typing yooo!
-    fetch = tk.Button(root, text="Fetch",bg="blue", fg="white",command=lambda :types(clean_paragraph))
+    fetch = tk.Button(root, text="Start Typing",bg="blue", fg="white",command=lambda :types(clean_paragraph))
     fetch.grid()
 
     root.mainloop()
