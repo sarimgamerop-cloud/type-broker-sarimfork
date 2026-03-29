@@ -33,7 +33,6 @@ def get_img():
     w = int(window_data[4])
     h = int(window_data[5])
 
-    print("here")
     shot = screenshot(region=(x, y, w, h))
     shot.save("image.png")
 
@@ -42,15 +41,15 @@ def img_cleaning(img):
     gray_img = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
     _, dst = cv2.threshold(gray_img, 150, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-    cv2.imshow('threshold Image', dst)
-    cv2.waitKey(0) # Waits for a key event
-    cv2.destroyAllWindows()
+    # cv2.imshow('threshold Image', dst)
+    # cv2.waitKey(0) # Waits for a key event
+    # cv2.destroyAllWindows()
 
 
 def types(text):
     sleep(2)
     print("Typing")
-    typewrite(text, interval=0.05)
+    typewrite(text, interval=0.01)
     print("Typing Completed")
 
 def fetch(img):
@@ -108,6 +107,7 @@ def get_text(img):
     # text = text.replace("\n"," ")
     return print(text)
 
+
 def captcha_clean(img):
     global dst
     gray_img = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
@@ -117,3 +117,5 @@ def captcha_clean(img):
     cv2.waitKey(0) # Waits for a key event
     cv2.destroyAllWindows()
 
+
+captcha_clean("6.png")
