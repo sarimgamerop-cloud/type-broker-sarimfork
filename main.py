@@ -2,7 +2,7 @@ import pytesseract
 from PIL import Image
 from pathlib import Path
 from time import sleep
-from pyautogui import typewrite , screenshot
+from pyautogui import typewrite , screenshot, position
 import re
 import subprocess
 import cv2 # pyright: ignore[reportMissingImports]
@@ -49,7 +49,7 @@ def img_cleaning(img):
 def types(text):
     sleep(2)
     print("Typing")
-    typewrite(text, interval=0.01)
+    typewrite(text, interval=0.03)
     print("Typing Completed")
 
 def fetch(img):
@@ -102,14 +102,17 @@ def gui():
     solve_captcha.pack()
     root.mainloop()
 
+# --------------------- Captcha Related --------------------
+
+
 def get_text(img):
     text = pytesseract.image_to_string(img,config="--psm 3")
     # text = text.replace("\n"," ")
     return print(text)
 
-
 def captcha_clean(img):
     global dst
+    
     gray_img = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
     _, dst = cv2.threshold(gray_img, 150, 255, cv2.THRESH_BINARY) # without cv2.THRESH_OTSU it give better results in captcha
 
@@ -117,5 +120,17 @@ def captcha_clean(img):
     cv2.waitKey(0) # Waits for a key event
     cv2.destroyAllWindows()
 
+def get_captcha():
+    take_shot = screenshot(region=(214, 384, 516, 176))
+    take_shot.save("cap.png")
 
-captcha_clean("6.png")
+def cp():
+    # clean image 
+    captcha_clean("cap.png")
+
+    #fetch the text and print
+    get_text(dst)
+
+
+
+
