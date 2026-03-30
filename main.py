@@ -11,12 +11,19 @@ import tkinter as tk
 import easyocr
 from textblob import TextBlob
 
-# TODO: Next Bypass Cheat Detection Captcha 
 
 project_root = Path(__file__).parent # give the location of folder
 img_loc = project_root /   "image.png"
-testing = project_root / "assets" /  "6.png"
 
+'''
+Change these Variable based on your display and Preferences
+'''
+
+typing_speed = 0.05
+captcha_typing_speed = 0.02
+start_test_button = (480,515)
+captcha_window = (214, 384, 516, 176)
+captcha_typing_panel = (430,603)
 
 def get_img():
     target_title = "TypeRacer"
@@ -51,7 +58,7 @@ def img_cleaning(img):
 def types(text):
     sleep(2)
     print("Typing")
-    typewrite(text, interval=0.024)
+    typewrite(text, typing_speed)
     print("Typing Completed")
 
 def fetch(img):
@@ -131,12 +138,22 @@ def captcha_clean(image): #Done
     #cv2.destroyAllWindows()
 
 def get_captcha(): #Done
-    click(480,515)
-    time.sleep(0.9)
-    take_shot = screenshot(region=(214, 384, 516, 176))
+    '''
+    Click on Start Test button and capture Image
+    '''
+    click(start_test_button)
+    time.sleep(0.9) # Wait for image to load
+    '''
+    Logic: the captcha always come one same poistion with same site - based on window postion
+    So screenshot take picture of captcha - the region value very on machine to machine
+    '''
+    take_shot = screenshot(region=captcha_window)
     take_shot.save("cap.png")
 
 def get_text(img):
+    '''
+    Fetch Text from captcha using easyocr and clean it little bit
+    '''
     global cp_text
     reader = easyocr.Reader(['en'])   
     result = reader.readtext(img,detail=0)
@@ -155,10 +172,11 @@ def solve_captcha():
 
     #fetch the text and print 
     get_text(final_img) #Done
-    
-    click(430,603)
+
+    # click on Typing Panel of captcha
+    click(captcha_typing_panel)
     print("Typing")
-    typewrite(cp_text, interval=0.01)
+    typewrite(cp_text, captcha_typing_speed)
     press('tab')
     time.sleep(0.1)
     press('enter')
