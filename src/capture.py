@@ -27,7 +27,7 @@ def get_img_linux():
             window_data = line.split()
             break
     if window_data is None:
-        log.error("window not found")
+        log.error("Window not found")
         return
     
     x = int(window_data[2])
@@ -61,15 +61,16 @@ def capture():
     os_name = platform.system()
 
     if os_name == "Windows":
-        print("Running on Windows")
+        log.info("Windows Detected.")
         get_img_windows()
 
     elif os_name == "Linux":
-        print("Running on Linux")
+        log.info("Linux user Detected - btw.")
         get_img_linux()
         
     elif os_name == "Darwin":
-        print("Macos is not supported - Switch to linux")
+        log.info("Macos is not supported - Switch to linux")
     else:
-        print(f"Running on an UnSupported OS: {os_name}")
+        log.error(f"Unsupported Sysmte {os_name}")
 
+capture()
