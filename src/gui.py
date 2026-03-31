@@ -23,7 +23,7 @@ def guilayout(background_image_path=None):
     """
 
     root = tk.Tk()
-    root.title("Type-Broker (EarlyDevelopment)")
+    root.title("Type-Broker")
     root.geometry("500x350")
     root.resizable(False, False)
     log.info("Running GUI")
