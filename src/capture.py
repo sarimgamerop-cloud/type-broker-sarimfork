@@ -3,20 +3,22 @@ import platform
 import os
 import time
 import logging
+from config import os
 
 
 # pip modules 
 from pyautogui import click , screenshot
 
 # local files 
-from config import start_test_button , captcha_window  
+from config import start_test_button, captcha_window, project_root  
 
 log = logging.getLogger(__name__)
 
 def take_shot(x,y,w,h,img_name):
     shot = screenshot(region=(x, y, w, h))
-    os.makedirs("assets", exist_ok=True)
-    shot.save(f"assets/{img_name}.png")
+    assets_dir = project_root / "assets"
+    assets_dir.mkdir(exist_ok=True)
+    shot.save(str(assets_dir / f"{img_name}.png"))
     log.info("Screen Shot Captured")
 
 
@@ -74,17 +76,20 @@ def get_captcha(): #Done
     take_shot(captcha_window[0],captcha_window[1],captcha_window[2],captcha_window[3],"captcha")
 
 def text_capture():
+    global os
     os_name = platform.system()
 
     if os_name == "Windows":
         log.info("Windows Detected.")
+        os = "windows"
         get_img_windows()
 
     elif os_name == "Linux":
-        log.info("Linux user Detected - btw.")
+        log.info("Linux user Detected - btw.") # xD
+        os = "linux"
         get_img_linux()
         
     elif os_name == "Darwin":
-        log.info("Macos is not supported - Switch to linux")
+        log.info("Macos is not supported - Switch to linux") # OpRoast
     else:
         log.error(f"Unsupported Sysmte {os_name}")

@@ -78,4 +78,13 @@ def fetch_the_text(img_location):
     global fetched_text
     text_capture() # capture the window
     fetched_text = text_fetch(img_location) # fetch the text from image
+    
+    if fetched_text:
+        print("\n" + "="*50)
+        print("FETCHED TEXT:")
+        print("="*50)
+        print(fetched_text)
+        print("="*50 + "\n")
+    else:
+        print("No text fetched - please check the screenshot")
 

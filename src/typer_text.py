@@ -10,6 +10,9 @@ log = logging.getLogger(__name__)
 
 
 def types_the_text(text):
+    if not text:
+        log.warning("No text to type - please fetch text first")
+        return
     time.sleep(2)
     log.info("Typing..")
     pyautogui.typewrite(text, typing_speed)

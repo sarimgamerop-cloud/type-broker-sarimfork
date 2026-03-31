@@ -1,5 +1,7 @@
 import re
+import logging
 
+log = logging.getLogger(__name__)
 
 import pytesseract 
 import easyocr
@@ -22,7 +24,8 @@ def text_fetch(img):
     match = re.search(r'.*(?:0wpm|Owpm|pyOwpm)\s+(.*)', text, flags=re.DOTALL)
     
     if not match:
-        return print("Pattern not found.")
+        log.warning("Pattern not found in OCR output")
+        return ""
         
     raw_paragraph = match.group(1)
     
@@ -36,6 +39,9 @@ def text_fetch(img):
     # 3. Handle minor OCR artifacts (like the stray "hb " in example 4)
     # This removes isolated 1-2 letter lowercase words at the very beginning
     clean_paragraph = re.sub(r'^[a-z]{1,2}\s+', '', clean_paragraph)
+    
+    # 4. Remove leading symbols like {}[]\/| etc from the start
+    clean_paragraph = re.sub(r'^[\s\d\[\]\(\)\|\\/\-_{}]+', '', clean_paragraph)
     
     return clean_paragraph
 
