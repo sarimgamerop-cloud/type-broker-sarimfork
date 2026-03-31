@@ -12,20 +12,9 @@ import easyocr
 from textblob import TextBlob
 
 
-project_root = Path(__file__).parent # give the location of folder
-img_loc = project_root /   "image.png"
 
-'''
-Change these Variable based on your display and Preferences
-'''
 
-typing_speed = 0.05
-captcha_typing_speed = 0.02
-start_test_button = (480,515)
-captcha_window = (214, 384, 516, 176)
-captcha_typing_panel = (430,603)
-
-def get_img():
+def get_img(): 
     target_title = "TypeRacer"
     output = subprocess.check_output(["wmctrl", "-l", "-G"]).decode("utf-8")
     window_data = None
