@@ -1,17 +1,23 @@
 import subprocess
-import pyautogui as ag
 import platform
 import os
+import time
 import logging
+
+
+# pip modules 
+from pyautogui import click , screenshot
+
+# local files 
+from main import start_test_button , captcha_window  
 
 log = logging.getLogger(__name__)
 
-def take_shot(x,y,w,h):
-    log.info("Taking Screenshot.")
-    shot = ag.screenshot(region=(x, y, w, h))
+def take_shot(x,y,w,h,img_name):
+    shot = screenshot(region=(x, y, w, h))
     os.makedirs("assets", exist_ok=True)
-    shot.save("assets/image.png")
-    log.info("Screenshot saved.")
+    shot.save(f"assets/{img_name}.png")
+    log.info("Screen Shot Captured")
 
 
 
@@ -36,7 +42,7 @@ def get_img_linux():
     h = int(window_data[5])
 
     # Take the screen shot
-    take_shot(x,y,w,h)
+    take_shot(x,y,w,h,"image")
 
 
 def get_img_windows():
@@ -50,14 +56,24 @@ def get_img_windows():
         x, y, w, h = window.left, window.top, window.width, window.height
 
         # Take the screen shot
-        take_shot(x,y,w,h)
+        take_shot(x,y,w,h,"image")
     else:
         log.error("Window not found")
         return
 
+def get_captcha(): #Done
+    '''
+    Click on Start Test button and capture Image
+    '''
+    click(start_test_button)
+    time.sleep(1) # Wait for image to load
+    '''
+    Logic: the captcha always come one same poistion with same site - based on window postion
+    So screenshot take picture of captcha - the region value very on machine to machine
+    '''
+    take_shot(captcha_window[0],captcha_window[1],captcha_window[2],captcha_window[3],"captcha")
 
-
-def capture():
+def text_capture():
     os_name = platform.system()
 
     if os_name == "Windows":
@@ -72,5 +88,3 @@ def capture():
         log.info("Macos is not supported - Switch to linux")
     else:
         log.error(f"Unsupported Sysmte {os_name}")
-
-capture()
