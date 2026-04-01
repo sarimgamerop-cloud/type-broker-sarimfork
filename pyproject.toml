@@ -3,6 +3,7 @@ name = "type-broker"
 version = "0.1.0"
 description = "Don't Cheat"
 readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.12"
 dependencies = [
     "easyocr>=1.7.2",

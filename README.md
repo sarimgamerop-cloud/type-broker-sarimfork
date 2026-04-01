@@ -84,3 +84,7 @@ This program has been developed and validated on the following setups:
 ## Contributor:
 
 Special thanks to [sarimgamerop](https://github.com/sarimgamerop-cloud) for contributing the beautiful GUI layout and Windows support.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
