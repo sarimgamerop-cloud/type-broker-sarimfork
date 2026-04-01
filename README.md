@@ -44,6 +44,7 @@ Download the Specific Version and install it on your computer or refer to the au
    sudo apt update
    sudo apt install tesseract-ocr wmctrl gnome-screenshot python3-tk
    ```
+**Alternate Method : ** Use the *automatic install* scripts in the `scripts\` folder.
 
 2. **Setup the Python environment**:
    ```bash
@@ -51,6 +52,8 @@ Download the Specific Version and install it on your computer or refer to the au
    source .venv/bin/activate
    uv sync
    ```
+
+
 
 ### NixOS Installation (using Flakes)
 
@@ -61,6 +64,13 @@ If you are using Nix with flakes enabled, a `flake.nix` is already provided. It 
    nix develop
    ```
    *The shell hook will automatically create a virtual environment and sync Python dependencies using `uv`.*
+
+## Windows 10/11 using Automatic Dependencies Install Script:
+
+Use the *automatic install* scripts in the `scripts\` folder.
+after the dependencies are installed refer to the **Running the App** page down below.
+**Note:** *if the automatic scripts are not working try installing them manually using python pip package manager and install tesseract by the link
+given in **System Requirments for Windows** at the top.* 
 
 ### Running the App
 
