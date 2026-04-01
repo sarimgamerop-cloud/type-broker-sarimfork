@@ -80,16 +80,16 @@ def text_capture():
     os_name = platform.system()
 
     if os_name == "Windows":
-        log.info("Windows Detected.")
+        log.info("Windows Detected")
         os = "windows"
         get_img_windows()
 
     elif os_name == "Linux":
-        log.info("Linux user Detected - btw.") # xD
+        log.info("Linux user Detected - btw") # xD
         os = "linux"
         get_img_linux()
         
     elif os_name == "Darwin":
         log.info("Macos is not supported - Switch to linux") # OpRoast
     else:
-        log.error(f"Unsupported Sysmte {os_name}")
+        log.error(f"Unsupported System {os_name}")

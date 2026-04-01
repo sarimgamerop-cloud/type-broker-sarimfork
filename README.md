@@ -5,8 +5,8 @@ Type-Broker is a Python script with a Tkinter graphical interface to automate ty
 > ⚠️ **Disclaimer: STRICTLY FOR EDUCATIONAL AND LEARNING PURPOSES.** 
 > This project was created solely for learning about Optical Character Recognition (OCR), computer vision, and GUI automation with Python. It is not intended to be used to cheat or disrupt competitive environments. Use responsibly.
 
-This Work on my Machine 
-You have to change xyz in main.py so it work on your machine
+This Work on my Machine
+You have to change xyz coordinates in the respective **config.py** so it work on your machine. **( See the documentation for details )**
 
 ## Requirements
 
@@ -14,22 +14,26 @@ To run this project, you will need the following system and Python dependencies 
 
 ### System Dependencies
 The automation relies on X11 tools for window manipulation and screenshots.
+* `pytesseract`
+* `pygetwindow`
+* `pillow` Required for tkinter services.
+* `textblob` Spelling Correction for accuracy.
+* `opencv-python`
 * `tesseract-ocr` (Required for PyTesseract OCR processing)
 * `easyocr` ()
 * `wmctrl` (Required to locate the TypeRacer window coordinates)
-* `gnome-screenshot` (or another screenshot utility compatible with `pyautogui` on your OS)
+* `gnome-screenshot` (or another screenshot utility compatible with `pyautogui` for windows.)
 * **Note:** This project relies on `wmctrl` and `pyautogui`, which generally require an **Xorg (X11)** display server and may not work natively on Wayland.
+
+## System requirment for Windows
+The pytesseract and tesseract-ocr only defines the tesseract module for the system level install which is needed for windows platform install the following
+native tesseract program for it to work correctly as it need the `tesseract.exe` : 
+[`GitHUB`](https://github.com/UB-Mannheim/tesseract/wiki)
+Download the Specific Version and install it on your computer or refer to the automatic install scripts.
 
 ### Python Requirements
 * Python 3.12 or newer.
 * Recommendation: Use [`uv`](https://github.com/astral-sh/uv) for fast package management.
-
-Dependencies defined in `pyproject.toml`:
-* `opencv-python`
-* `pillow`
-* `pyautogui`
-* `pytesseract`
-* `...`
 
 ## Installation and Usage
 
@@ -67,11 +71,16 @@ If you are using Nix with flakes enabled, a `flake.nix` is already provided. It 
 2. Open your browser and go to a TypeRacer match. Ensure the window title contains "TypeRacer".
 3. In the Type-Broker GUI:
    * Click **Fetch** when the race text is visible (this triggers the screenshot and OCR).
-   * Click **Start Typing** when the countdown finishes to automatically type the text.
+   * Click **Start Typing** to start Typing.
 
 ## Tested Environments
 
 This program has been developed and validated on the following setups:
 
 * ✅ **Ubuntu 24.04 GNOME (Xorg)**
+* ✅ **Window 10**
 * 🔄 **NixOS 26.05 (Yarara) x86_64 unstable** (Testing in progress)
+
+## Contributor:
+
+Special thanks to [sarimgamerop](https://github.com/sarimgamerop-cloud) for contributing the beautiful GUI layout and Windows support.
